@@ -9,7 +9,7 @@ import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.the
 
 plugins {
-    java
+    id("org.jetbrains.kotlin.jvm")
 }
 
 val libs = the<LibrariesForLibs>()

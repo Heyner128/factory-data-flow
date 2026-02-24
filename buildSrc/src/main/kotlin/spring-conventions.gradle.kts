@@ -5,14 +5,15 @@ import org.gradle.kotlin.dsl.withType
 val libs = the<LibrariesForLibs>()
 
 plugins {
-    java
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.spring")
     id("org.springframework.boot")
     id("io.spring.dependency-management")
 }
 
 tasks.withType<Test> {
     doFirst {
-        environment("SPRING_PROFILES_ACTIVE", "test,default")
+        environment("SPRING_PROFILES_ACTIVE", "test,default ")
     }
     useJUnitPlatform()
 }

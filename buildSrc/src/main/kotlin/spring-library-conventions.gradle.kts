@@ -3,7 +3,8 @@ import org.gradle.accessors.dm.LibrariesForLibs
 val libs = the<LibrariesForLibs>()
 
 plugins {
-    java
+    id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.kotlin.plugin.spring")
     id("org.springframework.boot").apply(false)
     id("io.spring.dependency-management")
 }
