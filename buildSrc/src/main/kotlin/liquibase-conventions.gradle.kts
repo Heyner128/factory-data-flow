@@ -19,7 +19,13 @@ val liquibaseRuntime by configurations.creating
 
 fun loadEnvironmentProperties() : Properties {
     val environmentFile = file("${project.rootDir}/.env")
-    return Properties().apply { load(FileInputStream(environmentFile)) }
+    return Properties().apply { 
+            try { load(FileInputStream(environmentFile)) }
+            catch (_: Exception) {
+                logger.warn("No .env file found, using environment variables")
+            }
+        }
+
 }
 
 fun liquibaseArgs(vararg command: String): List<String> {
@@ -48,6 +54,7 @@ fun liquibaseArgs(vararg command: String): List<String> {
 
 dependencies {
     implementation(libs.liquibase.core)
+    implementation(libs.spring.boot.starter.liquibase)
     liquibaseRuntime(libs.liquibase.core)
     liquibaseRuntime(libs.driver.postgresql)
 }

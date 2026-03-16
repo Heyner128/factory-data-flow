@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet: 
+      id: 0.0.1-create-baseline
+      author: heyner
+      changes:
+        - sqlFile:
+            path: 0.0/1-create-baseline.sql
+            relativeToChangelogFile: true

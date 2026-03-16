@@ -5,3 +5,6 @@
 build
 
 .idea/**
+
+# .env files
+.env
