@@ -1,9 +1,10 @@
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import dev.detekt.gradle.Detekt
+import dev.detekt.gradle.DetektCreateBaselineTask
 import org.gradle.accessors.dm.LibrariesForLibs
+
 plugins {
     id("org.jetbrains.kotlin.jvm")
-    id("io.gitlab.arturbosch.detekt")
+    id("dev.detekt")
 }
 
 val libs = the<LibrariesForLibs>()
@@ -18,6 +19,7 @@ detekt {
 
 tasks.withType<Detekt>().configureEach {
     jvmTarget = targetJvm.get()
+    config.setFrom(files("${rootProject.projectDir}/detekt.yaml"))
 }
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = targetJvm.get()

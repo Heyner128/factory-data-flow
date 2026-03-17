@@ -16,6 +16,7 @@ tasks.withType<Test> {
     doFirst {
         environment("SPRING_PROFILES_ACTIVE", "test,default ")
     }
+    jvmArgs("-XX:+EnableDynamicAgentLoading")
     useJUnitPlatform()
 }
 

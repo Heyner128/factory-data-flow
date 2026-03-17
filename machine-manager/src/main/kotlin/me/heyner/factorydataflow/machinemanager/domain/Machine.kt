@@ -9,12 +9,20 @@ import jakarta.persistence.Table
 @Table(name = "machine")
 class Machine {
     @EmbeddedId
-    var id: MachineId = MachineId();
-    
+    var id: MachineId = MachineId()
+
     @Column(name = "name", nullable = false)
     var name: String = ""
-    
+
     constructor(name: String) {
         this.name = name
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        return id == (other as Machine).id
+    }
+
+    override fun hashCode(): Int = javaClass.hashCode()
 }
