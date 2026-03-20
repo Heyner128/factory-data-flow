@@ -8,17 +8,13 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "machine")
-class Machine {
+class Machine(
+    @Column(name = "name", nullable = false)
+    var name: String,
+) {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
     val id: MachineId = MachineId()
-
-    @Column(name = "name", nullable = false)
-    lateinit var name: String
-
-    constructor(name: String) {
-        this.name = name
-    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

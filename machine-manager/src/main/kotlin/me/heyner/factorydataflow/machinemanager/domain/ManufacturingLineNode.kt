@@ -10,7 +10,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "manufacturing_line_node")
-class ManufacturingLineNode {
+class ManufacturingLineNode(
     @EmbeddedId
     @AttributeOverrides(
         AttributeOverride(name = "machine.id", column = Column(name = "machine_id", nullable = false)),
@@ -19,13 +19,9 @@ class ManufacturingLineNode {
             column = Column(name = "manufacturing_line_id", nullable = false),
         ),
     )
-    lateinit var id: ManufacturingLineNodeId
-
+    var id: ManufacturingLineNodeId,
+) {
     @Embedded
     @AttributeOverride(name = "id", column = Column(name = "next_machine_id", nullable = true))
     var nextMachine: MachineId? = null
-
-    constructor(machine: MachineId, manufacturingLine: ManufacturingLineId) {
-        this.id = ManufacturingLineNodeId(machine, manufacturingLine)
-    }
 }
