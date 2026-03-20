@@ -10,13 +10,19 @@ plugins {
     id("detekt-conventions")
 }
 
-val toolchainVersion = libs.versions.java.toolchain.get().toInt()
-val jvmBytecodeVersion = libs.versions.jvm.bytecode.get()
-val appVersion = libs.versions.factory.data.flow.get()
+val toolchainVersion =
+    libs.versions.java.toolchain
+        .get()
+        .toInt()
+val jvmBytecodeVersion =
+    libs.versions.jvm.bytecode
+        .get()
+val appVersion =
+    libs.versions.factory.data.flow
+        .get()
 
 group = "me.heyner"
 version = appVersion
-
 
 java {
     toolchain {
@@ -35,9 +41,6 @@ kotlin {
     jvmToolchain(toolchainVersion)
 }
 
-
 repositories {
     mavenCentral()
 }
-
-

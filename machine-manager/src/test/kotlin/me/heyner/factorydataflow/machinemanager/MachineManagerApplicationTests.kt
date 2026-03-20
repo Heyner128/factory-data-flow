@@ -9,6 +9,6 @@ import kotlin.test.Test
 class MachineManagerApplicationTests {
     @Test
     fun contextLoads() {
-        // intentionally left blank tests if the spring context loads
+        // intentionally left blank, tests if the spring context loads
     }
 }

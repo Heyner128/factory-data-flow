@@ -1,5 +1,6 @@
 package me.heyner.factorydataflow.machinemanager.domain
 
+import jakarta.persistence.AttributeOverride
 import jakarta.persistence.Column
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
@@ -9,10 +10,11 @@ import jakarta.persistence.Table
 @Table(name = "manufacturing_line")
 class ManufacturingLine {
     @EmbeddedId
-    var id: ManufacturingLineId = ManufacturingLineId()
+    @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
+    val id: ManufacturingLineId = ManufacturingLineId()
 
     @Column(name = "name", nullable = false)
-    var name: String = ""
+    lateinit var name: String
 
     constructor(name: String) {
         this.name = name

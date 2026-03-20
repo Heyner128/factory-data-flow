@@ -5,10 +5,16 @@ plugins {
     `kotlin-dsl`
 }
 
-val toolchainVersion = libs.versions.java.toolchain.get().toInt()
-val jvmBytecodeVersion = libs.versions.jvm.bytecode.get()
-val appVersion = libs.versions.factory.data.flow.get()
-
+val toolchainVersion =
+    libs.versions.java.toolchain
+        .get()
+        .toInt()
+val jvmBytecodeVersion =
+    libs.versions.jvm.bytecode
+        .get()
+val appVersion =
+    libs.versions.factory.data.flow
+        .get()
 
 repositories {
     mavenCentral()
@@ -32,7 +38,6 @@ kotlin {
     jvmToolchain(toolchainVersion)
 
     compilerOptions {
-        
     }
 }
 
@@ -44,5 +49,10 @@ dependencies {
     implementation(libs.kotlin.jpa.gradle)
     implementation(libs.kotlin.spring.gradle)
     implementation(libs.ktlint.gradle)
-    implementation(files((libs as Any).javaClass.superclass.protectionDomain.codeSource.location))
+    implementation(
+        files(
+            (libs as Any)
+                .javaClass.superclass.protectionDomain.codeSource.location,
+        ),
+    )
 }

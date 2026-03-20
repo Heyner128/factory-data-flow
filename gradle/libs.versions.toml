@@ -43,7 +43,6 @@ driver-postgresql = { group = "org.postgresql", name = "postgresql", version.ref
 spring-boot-gradle = { group = "org.springframework.boot", name="spring-boot-gradle-plugin", version.ref = "spring-boot" }
 spring-dependency-management-gradle = { group = "io.spring.dependency-management", name="io.spring.dependency-management.gradle.plugin", version.ref = "spring-dependency-management"}
 detekt-gradle = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
-detekt-ktlint = { group = "dev.detekt", name = "detekt-rules-ktlint-wrapper", version.ref = "detekt" }
 kotlin-gradle = {group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin"}
 kotlin-spring-gradle = {group = "org.jetbrains.kotlin.plugin.spring", name = "org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin"}
 ktlint-gradle = {group = "org.jlleitschuh.gradle.ktlint",name="org.jlleitschuh.gradle.ktlint.gradle.plugin",version.ref="ktlint"}

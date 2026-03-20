@@ -1,4 +1,10 @@
 style:
+  MaxLineLength:
+    active: true
+    maxLineLength: 120
   SerialVersionUIDInSerializableClass:
     active: false
+  MagicNumber:
+    active: true
+  
     

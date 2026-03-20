@@ -16,15 +16,10 @@ detekt {
     allRules = false
 }
 
-
 tasks.withType<Detekt>().configureEach {
     jvmTarget = targetJvm.get()
     config.setFrom(files("${rootProject.projectDir}/detekt.yaml"))
 }
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = targetJvm.get()
-}
-
-dependencies {
-    detektPlugins(libs.detekt.ktlint)
 }

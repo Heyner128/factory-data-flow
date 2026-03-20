@@ -1,7 +1,7 @@
 spring:
   docker:
     compose:
-      file: ../compose-dev.yml
+      file: ../compose-dev.yaml
       host: ${DOCKER_HOST:localhost}
   config:
    import: optional:file:../.env[.properties]

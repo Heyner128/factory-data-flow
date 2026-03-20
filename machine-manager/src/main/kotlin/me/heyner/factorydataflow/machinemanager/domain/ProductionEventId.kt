@@ -4,6 +4,6 @@ import jakarta.persistence.Embeddable
 import java.util.UUID
 
 @Embeddable
-data class MachineId(
+data class ProductionEventId(
     val id: UUID = UUID.randomUUID(),
 )
