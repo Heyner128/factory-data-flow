@@ -7,6 +7,7 @@ import jakarta.persistence.Embedded
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import me.heyner.factorydataflow.machinemanager.persistence.AbstractPersistableEntity
 
 @Entity
 @Table(name = "manufacturing_line_node")
@@ -19,8 +20,8 @@ class ManufacturingLineNode(
             column = Column(name = "manufacturing_line_id", nullable = false),
         ),
     )
-    var id: ManufacturingLineNodeId,
-) {
+    override val entityId: ManufacturingLineNodeId,
+) : AbstractPersistableEntity<ManufacturingLineNodeId>() {
     @Embedded
     @AttributeOverride(name = "id", column = Column(name = "next_machine_id", nullable = true))
     var nextMachine: MachineId? = null

@@ -5,22 +5,15 @@ import jakarta.persistence.Column
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import me.heyner.factorydataflow.machinemanager.persistence.AbstractPersistableEntity
 
 @Entity
 @Table(name = "manufacturing_line")
 class ManufacturingLine(
     @Column(name = "name", nullable = false)
     var name: String,
-) {
+) : AbstractPersistableEntity<ManufacturingLineId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    val id: ManufacturingLineId = ManufacturingLineId()
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-        return id == (other as ManufacturingLine).id
-    }
-
-    override fun hashCode(): Int = javaClass.hashCode()
+    override val entityId: ManufacturingLineId = ManufacturingLineId()
 }

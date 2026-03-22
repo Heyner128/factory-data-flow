@@ -5,29 +5,23 @@ import jakarta.persistence.Column
 import jakarta.persistence.Embedded
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import me.heyner.factorydataflow.machinemanager.persistence.AbstractPersistableEntity
 import java.time.OffsetDateTime
 
 @Entity
-@Table(name = "production_event")
-class ProductionEvent(
+@Table(name = "simulation")
+class Simulation(
     @Embedded
-    @AttributeOverride(name = "id", column = Column(name = "machine_id", nullable = false))
-    var machine: MachineId,
-) : AbstractPersistableEntity<ProductionEventId>() {
+    @AttributeOverride(name = "id", column = Column(name = "manufacturing_line_id", nullable = false))
+    val manufacturingLine: ManufacturingLineId,
+) : AbstractPersistableEntity<SimulationId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override val entityId: ProductionEventId = ProductionEventId()
+    override val entityId: SimulationId = SimulationId()
 
     @Column(name = "start_date", nullable = false)
     var startDate: OffsetDateTime = OffsetDateTime.now()
-
-    @Column(name = "quality", nullable = false)
-    @Enumerated(EnumType.STRING)
-    var quality: ProductionEventQuality = ProductionEventQuality.GOOD
 
     @Column(name = "end_date")
     var endDate: OffsetDateTime? = null
