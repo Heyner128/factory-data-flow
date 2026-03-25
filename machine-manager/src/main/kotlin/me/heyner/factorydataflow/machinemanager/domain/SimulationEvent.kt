@@ -16,14 +16,14 @@ import java.time.OffsetDateTime
 class SimulationEvent(
     @Embedded
     @AttributeOverride(name = "id", column = Column(name = "simulation_id", nullable = false))
-    val simulation: SimulationId,
+    var simulation: SimulationId,
     @Column(name = "type", nullable = false)
     @Enumerated(EnumType.STRING)
-    val type: SimulationEventType,
+    var type: SimulationEventType,
 ) : AbstractPersistableEntity<SimulationEventId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override val entityId: SimulationEventId = SimulationEventId()
+    override var entityId: SimulationEventId = SimulationEventId()
 
     @Column(name = "start_date", nullable = false)
     var startDate: OffsetDateTime = OffsetDateTime.now()

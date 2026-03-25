@@ -5,5 +5,5 @@ import java.util.UUID
 
 @Embeddable
 data class ManufacturingLineId(
-    val id: UUID = UUID.randomUUID(),
+    var id: UUID = UUID.randomUUID(),
 )

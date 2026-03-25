@@ -5,5 +5,5 @@ import java.util.UUID
 
 @Embeddable
 data class ProductionEventId(
-    val id: UUID = UUID.randomUUID(),
+    var id: UUID = UUID.randomUUID(),
 )

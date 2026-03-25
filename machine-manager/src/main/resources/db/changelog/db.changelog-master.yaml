@@ -1,8 +1,16 @@
 databaseChangeLog:
   - changeSet: 
-      id: 0.0.1-create-baseline
+      id: 1
       author: heyner
       changes:
         - sqlFile:
-            path: 0.0/1-create-baseline.sql
+            path: schema/001-create-baseline-tables.sql
+            relativeToChangelogFile: true
+  - changeSet: 
+      id: 2
+      author: heyner
+      context: demo
+      changes:
+        - sqlFile:
+            path: demo/001-insert-demo-data.sql
             relativeToChangelogFile: true

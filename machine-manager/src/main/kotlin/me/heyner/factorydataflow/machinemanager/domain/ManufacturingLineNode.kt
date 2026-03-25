@@ -20,7 +20,7 @@ class ManufacturingLineNode(
             column = Column(name = "manufacturing_line_id", nullable = false),
         ),
     )
-    override val entityId: ManufacturingLineNodeId,
+    override var entityId: ManufacturingLineNodeId,
 ) : AbstractPersistableEntity<ManufacturingLineNodeId>() {
     @Embedded
     @AttributeOverride(name = "id", column = Column(name = "next_machine_id", nullable = true))

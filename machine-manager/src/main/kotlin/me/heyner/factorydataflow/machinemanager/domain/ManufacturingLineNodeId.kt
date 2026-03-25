@@ -4,6 +4,6 @@ import jakarta.persistence.Embeddable
 
 @Embeddable
 data class ManufacturingLineNodeId(
-    val machine: MachineId,
-    val manufacturingLine: ManufacturingLineId,
+    var machine: MachineId,
+    var manufacturingLine: ManufacturingLineId,
 )

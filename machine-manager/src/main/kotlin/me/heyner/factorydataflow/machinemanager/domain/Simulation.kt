@@ -14,11 +14,11 @@ import java.time.OffsetDateTime
 class Simulation(
     @Embedded
     @AttributeOverride(name = "id", column = Column(name = "manufacturing_line_id", nullable = false))
-    val manufacturingLine: ManufacturingLineId,
+    var manufacturingLine: ManufacturingLineId,
 ) : AbstractPersistableEntity<SimulationId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override val entityId: SimulationId = SimulationId()
+    override var entityId: SimulationId = SimulationId()
 
     @Column(name = "start_date", nullable = false)
     var startDate: OffsetDateTime = OffsetDateTime.now()

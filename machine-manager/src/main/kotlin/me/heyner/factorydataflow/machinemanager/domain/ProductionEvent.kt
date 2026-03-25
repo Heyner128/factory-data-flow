@@ -20,7 +20,7 @@ class ProductionEvent(
 ) : AbstractPersistableEntity<ProductionEventId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override val entityId: ProductionEventId = ProductionEventId()
+    override var entityId: ProductionEventId = ProductionEventId()
 
     @Column(name = "start_date", nullable = false)
     var startDate: OffsetDateTime = OffsetDateTime.now()

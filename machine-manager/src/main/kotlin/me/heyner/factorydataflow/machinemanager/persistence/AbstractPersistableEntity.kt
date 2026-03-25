@@ -8,7 +8,7 @@ import org.springframework.data.domain.Persistable
 
 @MappedSuperclass
 abstract class AbstractPersistableEntity<ID : Any> : Persistable<ID> {
-    protected abstract val entityId: ID
+    abstract val entityId: ID
 
     @Transient
     private var isNew: Boolean = true

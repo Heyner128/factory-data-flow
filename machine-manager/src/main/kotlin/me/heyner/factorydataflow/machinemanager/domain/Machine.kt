@@ -15,5 +15,5 @@ class Machine(
 ) : AbstractPersistableEntity<MachineId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override val entityId: MachineId = MachineId()
+    override var entityId: MachineId = MachineId()
 }

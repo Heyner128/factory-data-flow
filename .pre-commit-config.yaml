@@ -11,3 +11,9 @@ repos:
         entry: ./gradlew detekt
         language: system
         pass_filenames: false
+      - id: jacocoCoverageVerification
+        name:  jacoco test coverage verification
+        entry: ./gradlew jacocoCoverageVerification
+        language: system
+        pass_filenames: false
+        

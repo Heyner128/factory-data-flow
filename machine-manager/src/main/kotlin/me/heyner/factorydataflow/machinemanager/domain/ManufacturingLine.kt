@@ -15,5 +15,5 @@ class ManufacturingLine(
 ) : AbstractPersistableEntity<ManufacturingLineId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override val entityId: ManufacturingLineId = ManufacturingLineId()
+    override var entityId: ManufacturingLineId = ManufacturingLineId()
 }
