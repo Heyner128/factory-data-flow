@@ -30,5 +30,5 @@ abstract class AbstractPersistableEntity<ID : Any> : Persistable<ID> {
         return entityId == other.entityId
     }
 
-    override fun hashCode(): Int = entityId.hashCode()
+    override fun hashCode(): Int = javaClass.hashCode()
 }
