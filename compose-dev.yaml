@@ -1,5 +1,5 @@
 name: "dev-factory-data-flow"
 services:
   postgres:
-    ports:
+    ports: !override
       - "15435:5432"

@@ -5,30 +5,26 @@ plugins {
 
 val jacocoExclusions =
     listOf(
-        "**/domain/**",
-        "**/exception/**",
-        "**/persistence/**",
+        "*.exception.*",
+        "*.persistence.*",
+        "*.stereotype.*",
+        "*.*Id",
+        "*.*Application*",
     )
-
-tasks.jacocoTestReport {
-    classDirectories.setFrom(
-        classDirectories.files.map {
-            fileTree(it) { exclude(jacocoExclusions) }
-        },
-    )
-}
 
 tasks.jacocoTestCoverageVerification {
     dependsOn(tasks.check)
-    classDirectories.setFrom(
-        classDirectories.files.map {
-            fileTree(it) { exclude(jacocoExclusions) }
-        },
-    )
     violationRules {
         rule {
+            includes = listOf("*.application.*")
             limit {
-                minimum = 0.7.toBigDecimal()
+                minimum = 0.8.toBigDecimal()
+            }
+        }
+        rule {
+            excludes = listOf("*.application.*") + jacocoExclusions
+            limit {
+                minimum = 0.6.toBigDecimal()
             }
         }
     }
