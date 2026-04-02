@@ -1,0 +1,10 @@
+name: "test-factory-data-flow"
+services:
+  postgres:
+    ports:
+      - "15436:5432"
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes: !override
+      - type: tmpfs
+        target: /var/lib/postgresql/data

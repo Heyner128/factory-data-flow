@@ -20,8 +20,8 @@ class Simulation(
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
     override var entityId: SimulationId = SimulationId()
 
-    @Column(name = "start_date", nullable = false)
-    var startDate: OffsetDateTime = OffsetDateTime.now()
+    @Column(name = "start_date")
+    var startDate: OffsetDateTime? = null
 
     @Column(name = "end_date")
     var endDate: OffsetDateTime? = null

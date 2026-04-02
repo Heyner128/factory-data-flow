@@ -1,8 +1,11 @@
 spring:
   docker:
     compose:
-      file: ../compose-dev.yaml
-      host: ${DOCKER_HOST:localhost}
+      file:
+        - ../compose.yaml
+        - ../compose-dev.yaml
+      host: ${DOCKER_HOST:-localhost}
+      lifecycle-management: start_only
   config:
    import: optional:file:../.env[.properties]
   jpa:

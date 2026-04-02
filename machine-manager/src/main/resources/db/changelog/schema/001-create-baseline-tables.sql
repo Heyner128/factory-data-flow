@@ -27,7 +27,7 @@ CREATE TABLE production_event(
 CREATE TABLE simulation(
     id UUID PRIMARY KEY,
     manufacturing_line_id UUID REFERENCES manufacturing_line(id) NOT NULL,
-    start_date TIMESTAMP NOT NULL,
+    start_date TIMESTAMP,
     end_date TIMESTAMP
 );
 

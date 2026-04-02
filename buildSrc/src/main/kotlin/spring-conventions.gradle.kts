@@ -34,14 +34,13 @@ tasks.register("devRun") {
 dependencies {
     implementation(libs.jackson.module.kotlin)
     implementation(libs.kotlin.reflect)
-    testAndDevelopmentOnly(libs.spring.boot.devtools)
-    developmentOnly(libs.spring.boot.docker.compose)
+    developmentOnly(libs.spring.boot.devtools)
+    testAndDevelopmentOnly(libs.spring.boot.docker.compose)
     runtimeOnly(libs.driver.postgresql)
     runtimeOnly(libs.spring.boot.starter.actuator)
     runtimeOnly(libs.spring.modulith.actuator)
     runtimeOnly(libs.spring.modulith.observability)
     testImplementation(libs.kotlin.test.junit5)
-    testImplementation(libs.testcontainers.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 

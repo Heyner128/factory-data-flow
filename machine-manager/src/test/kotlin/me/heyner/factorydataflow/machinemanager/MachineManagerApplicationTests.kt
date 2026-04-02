@@ -1,10 +1,8 @@
 package me.heyner.factorydataflow.machinemanager
 
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.Import
 import kotlin.test.Test
 
-@Import(TestcontainersConfiguration::class)
 @SpringBootTest
 class MachineManagerApplicationTests {
     @Test

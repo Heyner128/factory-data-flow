@@ -4,4 +4,6 @@ import org.springframework.data.repository.ListCrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface SimulationEventRepository : ListCrudRepository<SimulationEvent, SimulationEventId>
+interface SimulationEventRepository : ListCrudRepository<SimulationEvent, SimulationEventId> {
+    fun findFirstBySimulation(simulation: SimulationId): SimulationEvent?
+}
