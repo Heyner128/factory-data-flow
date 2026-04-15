@@ -26,7 +26,7 @@ class ManufacturingLineNodeRepositoryTests {
     fun setup() {
         testMachine = machineRepository.save(Machine("testMachine"))
         testLine = manufacturingLineRepository.save(ManufacturingLine("testLine"))
-        testNode = ManufacturingLineNode(ManufacturingLineNodeId(testMachine.entityId, testLine.entityId))
+        testNode = ManufacturingLineNode(ManufacturingLineNodeId(testMachine.id, testLine.id))
     }
 
     @Test
@@ -40,7 +40,7 @@ class ManufacturingLineNodeRepositoryTests {
     fun `given a node when updating next machine then it should be retrievable by id`() {
         manufacturingLineNodeRepository.save(testNode)
         val nextMachine = machineRepository.save(Machine("nextMachine"))
-        testNode.nextMachine = nextMachine.entityId
+        testNode.nextMachine = nextMachine.id
         manufacturingLineNodeRepository.save(testNode)
         val foundNode = manufacturingLineNodeRepository.findById(testNode.id).getOrNull()
         assertThat(foundNode).isEqualTo(testNode)

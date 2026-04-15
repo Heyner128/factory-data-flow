@@ -10,6 +10,7 @@ postgresql = "42.7.8"
 detekt = "2.0.0-alpha.2"
 kotlin = "2.3.0"
 ktlint = "14.0.1"
+ssj = "3.3.2"
 
 [libraries]
 liquibase-core = { group = "org.liquibase", name = "liquibase-core",version.ref = "liquibase"}
@@ -32,6 +33,7 @@ spring-modulith-observability = {group="org.springframework.modulith",name="spri
 spring-modulith-starter-core = {group="org.springframework.modulith", name="spring-modulith-starter-core"}
 spring-modulith-starter-jpa = {group="org.springframework.modulith", name="spring-modulith-starter-jpa"}
 spring-modulith-starter-test = {group="org.springframework.modulith", name="spring-modulith-starter-test"}
+ssj = {group = "ca.umontreal.iro.simul:ssj:3.3.2", name = "ssj"}
 jackson-module-kotlin = {group="tools.jackson.module", name="jackson-module-kotlin"}
 kotlin-reflect = {group = "org.jetbrains.kotlin", name="kotlin-reflect"}
 kotlin-test-junit5 = {group = "org.jetbrains.kotlin", name="kotlin-test-junit5"}

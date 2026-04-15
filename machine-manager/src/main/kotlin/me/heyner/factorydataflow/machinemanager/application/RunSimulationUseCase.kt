@@ -1,20 +1,19 @@
 package me.heyner.factorydataflow.machinemanager.application
 
 import me.heyner.factorydataflow.machinemanager.domain.Simulation
-import me.heyner.factorydataflow.machinemanager.domain.SimulationEvent
-import me.heyner.factorydataflow.machinemanager.domain.SimulationEventRepository
-import me.heyner.factorydataflow.machinemanager.domain.SimulationEventType
+import me.heyner.factorydataflow.machinemanager.domain.SimulationExecutionLog
+import me.heyner.factorydataflow.machinemanager.domain.SimulationExecutionLogRepository
 import me.heyner.factorydataflow.machinemanager.domain.SimulationId
 import me.heyner.factorydataflow.machinemanager.domain.SimulationRepository
-import me.heyner.factorydataflow.machinemanager.exception.SimulationExecutionException
+import me.heyner.factorydataflow.machinemanager.domain.SimulationStatus
 import me.heyner.factorydataflow.machinemanager.exception.SimulationNotFoundException
 import me.heyner.factorydataflow.machinemanager.stereotype.UseCase
 import org.springframework.transaction.annotation.Transactional
 
 @UseCase
-class StartSimulationUseCase(
+class RunSimulationUseCase(
     private val simulationRepository: SimulationRepository,
-    private val simulationEventRepository: SimulationEventRepository,
+    private val simulationExecutionLogRepository: SimulationExecutionLogRepository,
 ) {
     @Transactional
     fun execute(simulationId: SimulationId) {
@@ -26,13 +25,10 @@ class StartSimulationUseCase(
                         "The simulation $simulationId does not exist",
                     )
                 })
-        if (simulation.startDate != null) {
-            throw SimulationExecutionException(
-                "The simulation $simulationId has already been started",
+        val executionLog =
+            simulationExecutionLogRepository.save(
+                SimulationExecutionLog(simulation.id, SimulationStatus.STARTED),
             )
-        }
-        val startSimulationEvent = SimulationEvent(simulationId, SimulationEventType.START)
-        simulationEventRepository.save(startSimulationEvent)
-        simulation.startDate = startSimulationEvent.startDate
+        simulation.start(executionLog.startDate)
     }
 }

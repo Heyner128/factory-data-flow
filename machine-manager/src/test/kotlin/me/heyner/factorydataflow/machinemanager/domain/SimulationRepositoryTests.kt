@@ -22,7 +22,7 @@ class SimulationRepositoryTests {
     @BeforeEach
     fun setup() {
         testLine = manufacturingLineRepository.save(ManufacturingLine("testLine"))
-        testSimulation = Simulation(testLine.entityId)
+        testSimulation = Simulation(testLine.id)
     }
 
     @Test

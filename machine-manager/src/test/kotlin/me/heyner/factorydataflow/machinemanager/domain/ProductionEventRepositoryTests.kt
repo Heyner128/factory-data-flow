@@ -14,15 +14,31 @@ class ProductionEventRepositoryTests {
     lateinit var machineRepository: MachineRepository
 
     @Autowired
+    lateinit var simulationRepository: SimulationRepository
+
+    @Autowired
+    lateinit var manufacturingLineRepository: ManufacturingLineRepository
+
+    @Autowired
     lateinit var productionEventRepository: ProductionEventRepository
 
     lateinit var testMachine: Machine
+    lateinit var testLine: ManufacturingLine
+    lateinit var testSimulation: Simulation
     lateinit var testProductionEvent: ProductionEvent
 
     @BeforeEach
     fun setup() {
         testMachine = machineRepository.save(Machine("testMachine"))
-        testProductionEvent = ProductionEvent(testMachine.entityId)
+        testLine = manufacturingLineRepository.save(ManufacturingLine("testLine"))
+        testSimulation = simulationRepository.save(Simulation(testLine.id))
+        testProductionEvent =
+            ProductionEvent(
+                ProductionEventId(
+                    testMachine.id,
+                    testSimulation.id,
+                ),
+            )
     }
 
     @Test

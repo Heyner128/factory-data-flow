@@ -1,8 +1,8 @@
 package me.heyner.factorydataflow.machinemanager.domain
 
 import jakarta.persistence.AttributeOverride
+import jakarta.persistence.AttributeOverrides
 import jakarta.persistence.Column
-import jakarta.persistence.Embedded
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -14,14 +14,16 @@ import java.time.OffsetDateTime
 @Entity
 @Table(name = "production_event")
 class ProductionEvent(
-    @Embedded
-    @AttributeOverride(name = "id", column = Column(name = "machine_id", nullable = false))
-    var machine: MachineId,
-) : AbstractPersistableEntity<ProductionEventId>() {
     @EmbeddedId
-    @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override var entityId: ProductionEventId = ProductionEventId()
-
+    @AttributeOverrides(
+        AttributeOverride(name = "machine.id", column = Column(name = "machine_id", nullable = false)),
+        AttributeOverride(
+            name = "simulation.id",
+            column = Column(name = "simulation_id", nullable = false),
+        ),
+    )
+    override var entityId: ProductionEventId,
+) : AbstractPersistableEntity<ProductionEventId>() {
     @Column(name = "start_date", nullable = false)
     var startDate: OffsetDateTime = OffsetDateTime.now()
 

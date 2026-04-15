@@ -12,18 +12,18 @@ import me.heyner.factorydataflow.machinemanager.persistence.AbstractPersistableE
 import java.time.OffsetDateTime
 
 @Entity
-@Table(name = "simulation_event")
-class SimulationEvent(
+@Table(name = "simulation_execution_log")
+class SimulationExecutionLog(
     @Embedded
     @AttributeOverride(name = "id", column = Column(name = "simulation_id", nullable = false))
     var simulation: SimulationId,
-    @Column(name = "type", nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    var type: SimulationEventType,
-) : AbstractPersistableEntity<SimulationEventId>() {
+    var status: SimulationStatus,
+) : AbstractPersistableEntity<SimulationExecutionLogId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override var entityId: SimulationEventId = SimulationEventId()
+    override var entityId: SimulationExecutionLogId = SimulationExecutionLogId()
 
     @Column(name = "start_date", nullable = false)
     var startDate: OffsetDateTime = OffsetDateTime.now()
