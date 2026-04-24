@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: heyner
+      changes:
+        - sqlFile:
+            path: test/001-create-test-entity-table.sql
+            relativeToChangelogFile: true

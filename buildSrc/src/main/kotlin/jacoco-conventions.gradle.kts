@@ -3,7 +3,7 @@ plugins {
     jacoco
 }
 
-val jacocoExclusions =
+val domainFiles =
     listOf(
         "*.exception.*",
         "*.persistence.*",
@@ -12,17 +12,21 @@ val jacocoExclusions =
         "*.*Application*",
     )
 
+val nonDomainFiles = listOf("*.application.*", "*.infrastructure.*")
+
 tasks.jacocoTestCoverageVerification {
     dependsOn(tasks.check)
     violationRules {
         rule {
-            includes = listOf("*.application.*")
+            includes = nonDomainFiles
+            excludes = domainFiles
             limit {
                 minimum = 0.8.toBigDecimal()
             }
         }
         rule {
-            excludes = listOf("*.application.*") + jacocoExclusions
+            excludes = nonDomainFiles
+            includes = domainFiles
             limit {
                 minimum = 0.6.toBigDecimal()
             }

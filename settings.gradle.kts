@@ -1,5 +1,5 @@
-rootProject.name = "factory-data-flow"
+rootProject.name = "manusim"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("machine-manager")
+include("core")
