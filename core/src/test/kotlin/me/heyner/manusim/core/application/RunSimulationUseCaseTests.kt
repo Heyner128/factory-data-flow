@@ -1,44 +1,37 @@
 package me.heyner.manusim.core.application
 
-import me.heyner.manusim.core.domain.ManufacturingLineRepository
+import me.heyner.manusim.core.ManusimTest
 import me.heyner.manusim.core.domain.Simulation
 import me.heyner.manusim.core.domain.SimulationExecutionLogRepository
 import me.heyner.manusim.core.domain.SimulationId
 import me.heyner.manusim.core.domain.SimulationRepository
+import me.heyner.manusim.core.domain.SimulationStatus
 import me.heyner.manusim.core.exception.SimulationExecutionException
 import me.heyner.manusim.core.exception.SimulationNotFoundException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class RunSimulationUseCaseTests {
-    @Autowired
-    private lateinit var runSimulationUseCase: RunSimulationUseCase
-
-    @Autowired
-    private lateinit var manufacturingLineRepository: ManufacturingLineRepository
-
-    @Autowired
-    private lateinit var simulationRepository: SimulationRepository
-
-    @Autowired
-    private lateinit var simulationExecutionLogRepository: SimulationExecutionLogRepository
-
+@ManusimTest
+class RunSimulationUseCaseTests(
+    @Autowired private val runSimulationUseCase: RunSimulationUseCase,
+    @Autowired private val simulationRepository: SimulationRepository,
+    @Autowired private val simulationExecutionLogRepository: SimulationExecutionLogRepository,
+) {
     private lateinit var testSimulation: Simulation
 
     @BeforeTest
     fun setup() {
-        val manufacturingLine = manufacturingLineRepository.findAll().first()
-        testSimulation = Simulation(manufacturingLine.id)
+        simulationExecutionLogRepository.deleteAll()
+        simulationRepository.deleteAll()
+        testSimulation = Simulation()
         simulationRepository.save(testSimulation)
     }
 
     @Test
-    fun `given an already created simulation when simulation starts then event and start date are set`() {
+    fun `when simulation starts then event and start date are set`() {
         runSimulationUseCase.execute(
             testSimulation.id,
         )
@@ -47,7 +40,19 @@ class RunSimulationUseCaseTests {
         val simulation = simulationRepository.findById(testSimulation.id).get()
 
         assertThat(simulation.startDate).isNotNull()
+        assertThat(simulation.status).isEqualTo(SimulationStatus.RUNNING)
         assertThat(createdEvent).isNotNull()
+    }
+
+    @Test
+    fun `when simulation starts then the initial number of pieces is set`() {
+        runSimulationUseCase.execute(
+            testSimulation.id,
+        )
+        val simulation = simulationRepository.findById(testSimulation.id).get()
+        assertThat(simulation.state).isNotNull()
+        assertThat(simulation.state?.piecesPending).isEqualTo(0)
+        assertThat(simulation.state?.piecesFinished).isEqualTo(0)
     }
 
     @Test

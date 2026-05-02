@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MachineManagerApplication
+class ManusimApplication
 
-fun main(args: Array<String>) {
-    runApplication<me.heyner.manusim.core.MachineManagerApplication>(*args)
+fun main() {
+    runApplication<ManusimApplication>()
 }

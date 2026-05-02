@@ -11,15 +11,10 @@ import jakarta.persistence.Table
 import me.heyner.manusim.core.exception.SimulationExecutionException
 import me.heyner.manusim.core.persistence.AbstractPersistableEntity
 import java.time.OffsetDateTime
-import java.util.LinkedList
 
 @Entity
 @Table(name = "simulation")
-class Simulation(
-    @Embedded
-    @AttributeOverride(name = "id", column = Column(name = "manufacturing_line_id", nullable = false))
-    var manufacturingLine: ManufacturingLineId,
-) : AbstractPersistableEntity<SimulationId>() {
+class Simulation : AbstractPersistableEntity<SimulationId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
     override var entityId: SimulationId = SimulationId()
@@ -31,11 +26,12 @@ class Simulation(
     @Enumerated(EnumType.STRING)
     var status: SimulationStatus = SimulationStatus.CREATED
 
-    @Transient
-    var eventList: List<ProductionEvent> = LinkedList()
+    @Embedded
+    @AttributeOverride(name = "id", column = Column(name = "machine_id"))
+    var machine: MachineId? = null
 
-    @Column(name = "end_date")
-    var endDate: OffsetDateTime? = null
+    @Embedded
+    var state: SimulationState? = null
 
     fun start(date: OffsetDateTime) {
         if (startDate != null) {
@@ -44,6 +40,7 @@ class Simulation(
             )
         }
         startDate = date
-        status = SimulationStatus.STARTED
+        status = SimulationStatus.RUNNING
+        state = SimulationState()
     }
 }

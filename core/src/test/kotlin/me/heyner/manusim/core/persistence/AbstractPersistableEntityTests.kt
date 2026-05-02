@@ -5,10 +5,10 @@ import jakarta.persistence.Column
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
+import me.heyner.manusim.core.ManusimTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.UUID
 import kotlin.test.Test
@@ -27,7 +27,7 @@ class TestPersistableEntity : AbstractPersistableEntity<TestPersistableEntityId>
 
 interface TestPersistableEntityRepository : JpaRepository<TestPersistableEntity, TestPersistableEntityId>
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ManusimTest
 class AbstractPersistableEntityTests(
     @Autowired val testPersistableEntityRepository: TestPersistableEntityRepository,
 ) {

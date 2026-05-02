@@ -1,6 +1,6 @@
 spring:
   application:
-    name: machine-manager
+    name: manusim
   config:
     import: optional:file:../.env[.properties]
   main:

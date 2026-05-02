@@ -9,11 +9,8 @@ import me.heyner.manusim.core.persistence.AbstractPersistableEntity
 
 @Entity
 @Table(name = "machine")
-class Machine(
-    @Column(name = "name", nullable = false)
-    var name: String,
-) : AbstractPersistableEntity<MachineId>() {
+class Machine : AbstractPersistableEntity<MachineId>() {
     @EmbeddedId
     @AttributeOverride(name = "id", column = Column(name = "id", nullable = false))
-    override var entityId: MachineId = MachineId()
+    override var entityId = MachineId()
 }

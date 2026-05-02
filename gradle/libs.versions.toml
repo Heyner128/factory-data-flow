@@ -11,6 +11,7 @@ detekt = "2.0.0-alpha.2"
 kotlin = "2.3.0"
 ktlint = "14.0.1"
 ssj = "3.3.2"
+testcontainers = "2.0.5"
 
 [libraries]
 liquibase-core = { group = "org.liquibase", name = "liquibase-core",version.ref = "liquibase"}
@@ -28,6 +29,7 @@ spring-boot-starter-security-test = {group="org.springframework.boot",name="spri
 spring-boot-starter-validation-test = {group="org.springframework.boot",name="spring-boot-starter-validation-test"}
 spring-boot-starter-webmvc-test = {group="org.springframework.boot",name="spring-boot-starter-webmvc-test"}
 spring-boot-docker-compose = {group="org.springframework.boot",name="spring-boot-docker-compose"}
+spring-boot-testcontainers = {group="org.springframework.boot",name="spring-boot-testcontainers"}
 spring-modulith-actuator = {group="org.springframework.modulith",name="spring-modulith-actuator"}
 spring-modulith-observability = {group="org.springframework.modulith",name="spring-modulith-observability"}
 spring-modulith-starter-core = {group="org.springframework.modulith", name="spring-modulith-starter-core"}
@@ -38,6 +40,8 @@ jackson-module-kotlin = {group="tools.jackson.module", name="jackson-module-kotl
 kotlin-reflect = {group = "org.jetbrains.kotlin", name="kotlin-reflect"}
 kotlin-test-junit5 = {group = "org.jetbrains.kotlin", name="kotlin-test-junit5"}
 junit-platform-launcher = {group="org.junit.platform", name="junit-platform-launcher"}
+testcontainers-junit = {group="org.testcontainers", name="testcontainers-junit-jupiter", version.ref="testcontainers"}
+testcontainers-postgresql = {group="org.testcontainers", name="testcontainers-postgresql", version.ref="testcontainers"}
 spring-boot-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools" }
 driver-postgresql = { group = "org.postgresql", name = "postgresql", version.ref = "postgresql" }
 spring-boot-gradle = { group = "org.springframework.boot", name="spring-boot-gradle-plugin", version.ref = "spring-boot" }

@@ -1,16 +1,4 @@
 spring:
-  docker:
-    compose:
-      file:
-        - ../compose.yaml
-        - ../compose-test.yaml
-      host: ${DOCKER_HOST:-localhost}
-      skip:
-        in-tests: false
-      start:
-        skip: never
-  config:
-    import: optional:file:../.env[.properties]
   liquibase:
     contexts: 
        - demo
