@@ -3,6 +3,6 @@ package me.heyner.manusim.core.domain
 import jakarta.persistence.Embeddable
 
 @Embeddable
-data class SimulationExecutionLogId(
+data class SimulationStateId(
     var simulation: SimulationId,
 )

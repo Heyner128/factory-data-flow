@@ -30,9 +30,6 @@ class Simulation : AbstractPersistableEntity<SimulationId>() {
     @AttributeOverride(name = "id", column = Column(name = "machine_id"))
     var machine: MachineId? = null
 
-    @Embedded
-    var state: SimulationState? = null
-
     fun start(date: OffsetDateTime) {
         if (startDate != null) {
             throw SimulationExecutionException(
@@ -41,6 +38,5 @@ class Simulation : AbstractPersistableEntity<SimulationId>() {
         }
         startDate = date
         status = SimulationStatus.RUNNING
-        state = SimulationState()
     }
 }

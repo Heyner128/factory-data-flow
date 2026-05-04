@@ -5,6 +5,8 @@ import me.heyner.manusim.core.domain.SimulationExecutionLog
 import me.heyner.manusim.core.domain.SimulationExecutionLogRepository
 import me.heyner.manusim.core.domain.SimulationId
 import me.heyner.manusim.core.domain.SimulationRepository
+import me.heyner.manusim.core.domain.SimulationState
+import me.heyner.manusim.core.domain.SimulationStateRepository
 import me.heyner.manusim.core.exception.SimulationNotFoundException
 import me.heyner.manusim.core.stereotype.UseCase
 import org.springframework.transaction.annotation.Transactional
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional
 class RunSimulationUseCase(
     private val simulationRepository: SimulationRepository,
     private val simulationExecutionLogRepository: SimulationExecutionLogRepository,
+    private val simulationStateRepository: SimulationStateRepository,
 ) {
     @Transactional
     fun execute(simulationId: SimulationId) {
@@ -29,5 +32,8 @@ class RunSimulationUseCase(
                 SimulationExecutionLog(simulation.id),
             )
         simulation.start(executionLog.startDate)
+        simulationStateRepository.save(
+            SimulationState(simulation.id),
+        )
     }
 }

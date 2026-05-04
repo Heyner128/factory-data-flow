@@ -5,6 +5,8 @@ import me.heyner.manusim.core.domain.Simulation
 import me.heyner.manusim.core.domain.SimulationExecutionLogRepository
 import me.heyner.manusim.core.domain.SimulationId
 import me.heyner.manusim.core.domain.SimulationRepository
+import me.heyner.manusim.core.domain.SimulationStateEventRepository
+import me.heyner.manusim.core.domain.SimulationStateRepository
 import me.heyner.manusim.core.domain.SimulationStatus
 import me.heyner.manusim.core.exception.SimulationExecutionException
 import me.heyner.manusim.core.exception.SimulationNotFoundException
@@ -19,6 +21,8 @@ class RunSimulationUseCaseTests(
     @Autowired private val runSimulationUseCase: RunSimulationUseCase,
     @Autowired private val simulationRepository: SimulationRepository,
     @Autowired private val simulationExecutionLogRepository: SimulationExecutionLogRepository,
+    @Autowired private val simulationStateRepository: SimulationStateRepository,
+    @Autowired private val simulationStateEventRepository: SimulationStateEventRepository,
 ) {
     private lateinit var testSimulation: Simulation
 
@@ -36,7 +40,7 @@ class RunSimulationUseCaseTests(
             testSimulation.id,
         )
 
-        val createdEvent = simulationExecutionLogRepository.findFirstBySimulation(testSimulation.id)
+        val createdEvent = simulationExecutionLogRepository.findFirstByEntityIdSimulation(testSimulation.id)
         val simulation = simulationRepository.findById(testSimulation.id).get()
 
         assertThat(simulation.startDate).isNotNull()
@@ -45,14 +49,16 @@ class RunSimulationUseCaseTests(
     }
 
     @Test
-    fun `when simulation starts then the initial number of pieces is set`() {
+    fun `when simulation starts then the initial state is created`() {
         runSimulationUseCase.execute(
             testSimulation.id,
         )
-        val simulation = simulationRepository.findById(testSimulation.id).get()
-        assertThat(simulation.state).isNotNull()
-        assertThat(simulation.state?.piecesPending).isEqualTo(0)
-        assertThat(simulation.state?.piecesFinished).isEqualTo(0)
+        val simulationState = simulationStateRepository.findByEntityIdSimulation(testSimulation.id)
+        assertThat(simulationState).isNotNull()
+        assertThat(simulationState?.piecesPending).isEqualTo(0)
+        assertThat(simulationState?.piecesFinished).isEqualTo(0)
+        val events = simulationStateEventRepository.findAllByEntityIdSimulationState(simulationState!!.id)
+        assertThat(events.size).isEqualTo(0)
     }
 
     @Test

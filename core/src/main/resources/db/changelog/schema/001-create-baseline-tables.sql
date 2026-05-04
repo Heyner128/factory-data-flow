@@ -14,10 +14,19 @@ CREATE TABLE simulation
     pieces_finished       BIGINT
 );
 
+CREATE TABLE simulation_state (
+    simulation_id UUID PRIMARY KEY REFERENCES simulation(id) ON DELETE CASCADE,
+    pieces_pending        BIGINT DEFAULT 0,
+    pieces_finished       BIGINT DEFAULT 0
+);
+
+CREATE TABLE simulation_state_event (
+    simulation_id UUID PRIMARY KEY REFERENCES simulation_state(simulation_id) ON DELETE CASCADE
+);
+
 CREATE TABLE simulation_execution_log
 (
-    id            UUID PRIMARY KEY,
-    simulation_id UUID REFERENCES simulation(id) ON DELETE CASCADE,
+    simulation_id UUID PRIMARY KEY REFERENCES simulation(id) ON DELETE CASCADE,
     start_date    TIMESTAMP  NOT NULL,
     end_date      TIMESTAMP
 );
