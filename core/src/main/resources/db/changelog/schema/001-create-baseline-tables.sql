@@ -1,6 +1,8 @@
 CREATE TABLE machine
 (
-    id UUID PRIMARY KEY
+    id UUID PRIMARY KEY,
+    time_generator_from NUMERIC NOT NULL,
+    time_generator_to   NUMERIC NOT NULL
 );
 
 
@@ -8,26 +10,21 @@ CREATE TABLE simulation
 (
     id                    UUID PRIMARY KEY,
     machine_id            UUID REFERENCES machine(id) ON DELETE CASCADE,
-    status                TEXT NOT NULL,
-    start_date            TIMESTAMP,
-    pieces_pending        BIGINT,
-    pieces_finished       BIGINT
+    status                TEXT NOT NULL
 );
 
-CREATE TABLE simulation_state (
-    simulation_id UUID PRIMARY KEY REFERENCES simulation(id) ON DELETE CASCADE,
-    pieces_pending        BIGINT DEFAULT 0,
-    pieces_finished       BIGINT DEFAULT 0
+CREATE TABLE execution_events (
+    simulation_id UUID REFERENCES simulation(id) ON DELETE CASCADE,
+    type    TEXT NOT NULL,
+    duration_in_ms BIGINT NOT NULL
 );
 
-CREATE TABLE simulation_state_event (
-    simulation_id UUID PRIMARY KEY REFERENCES simulation_state(simulation_id) ON DELETE CASCADE
-);
-
-CREATE TABLE simulation_execution_log
+CREATE TABLE execution
 (
     simulation_id UUID PRIMARY KEY REFERENCES simulation(id) ON DELETE CASCADE,
-    start_date    TIMESTAMP  NOT NULL,
-    end_date      TIMESTAMP
+    duration_in_ms BIGINT,
+    duration_elapsed_in_ms BIGINT NOT NULL DEFAULT 0,
+    pieces_pending        BIGINT,
+    pieces_finished       BIGINT
 );
 

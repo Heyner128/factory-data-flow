@@ -7,12 +7,14 @@ import me.heyner.manusim.core.domain.MachineRepository
 import me.heyner.manusim.core.domain.Simulation
 import me.heyner.manusim.core.domain.SimulationId
 import me.heyner.manusim.core.domain.SimulationRepository
+import me.heyner.manusim.core.domain.TimeGenerator
 import me.heyner.manusim.core.exception.MachineNotFoundException
 import me.heyner.manusim.core.exception.SimulationNotFoundException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
+import java.time.Duration
 import kotlin.test.Test
 
 @ManusimTest
@@ -27,10 +29,8 @@ class AddMachineToSimulationUseCaseTests(
 
     @BeforeEach
     fun setup() {
-        simulationRepository.deleteAll()
-        machineRepository.deleteAll()
         testSimulation = Simulation()
-        testMachine = Machine()
+        testMachine = Machine(TimeGenerator(Duration.ofSeconds(10), Duration.ofSeconds(20)))
         simulationRepository.save(testSimulation)
         machineRepository.save(testMachine)
     }

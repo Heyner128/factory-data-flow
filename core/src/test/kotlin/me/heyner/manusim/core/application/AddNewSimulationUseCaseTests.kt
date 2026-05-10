@@ -2,7 +2,7 @@ package me.heyner.manusim.core.application
 
 import me.heyner.manusim.core.ManusimTest
 import me.heyner.manusim.core.domain.SimulationRepository
-import me.heyner.manusim.core.domain.SimulationStatus
+import me.heyner.manusim.core.domain.Status
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.beans.factory.annotation.Autowired
 import kotlin.test.Test
@@ -20,8 +20,7 @@ class AddNewSimulationUseCaseTests(
         assertThat(simulations).isNotEmpty()
         simulations.forEach { simulation ->
             assertThat(simulation.id).isNotNull()
-            assertThat(simulation.status).isEqualTo(SimulationStatus.CREATED)
-            assertThat(simulation.startDate).isNull()
+            assertThat(simulation.status).isEqualTo(Status.NOT_RUNNING)
         }
     }
 }

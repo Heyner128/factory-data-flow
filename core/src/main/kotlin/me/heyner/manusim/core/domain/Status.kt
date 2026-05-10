@@ -1,6 +1,6 @@
 package me.heyner.manusim.core.domain
 
-enum class SimulationStatus {
-    CREATED,
+enum class Status {
     RUNNING,
+    NOT_RUNNING,
 }
