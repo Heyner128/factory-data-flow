@@ -10,6 +10,7 @@ import me.heyner.manusim.core.domain.Status
 import me.heyner.manusim.core.domain.TimeGenerator
 import me.heyner.manusim.core.exception.SimulationExecutionException
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.testcontainers.shaded.org.awaitility.Awaitility
@@ -24,6 +25,14 @@ class RunSimulationUseCaseTests(
     @Autowired private val machineRepository: MachineRepository,
 ) {
     private var duration: Duration = Duration.ofMillis(1500)
+
+    @AfterEach
+    fun tearDown() {
+        simulationRepository
+            .findAll()
+            .filter { it.status == Status.RUNNING }
+            .forEach { waitUnitFinished(it.id) }
+    }
 
     private fun createSimulation(): Simulation {
         val testSimulation = Simulation()
@@ -68,7 +77,6 @@ class RunSimulationUseCaseTests(
         assertThat(execution).isNotNull()
         assertThat(execution.duration).isGreaterThan(Duration.ZERO)
         assertThat(execution.durationElapsed).isEqualTo(Duration.ZERO)
-        waitUnitFinished(testSimulation.id)
     }
 
     @Test
@@ -83,7 +91,6 @@ class RunSimulationUseCaseTests(
         assertThat(execution.state?.piecesPending).isEqualTo(0)
         assertThat(execution.state?.piecesFinished).isEqualTo(0)
         assertThat(execution.events.size).isNotZero()
-        waitUnitFinished(testSimulation.id)
     }
 
     @Test
@@ -138,7 +145,6 @@ class RunSimulationUseCaseTests(
             }
             Thread.sleep(testMachine.timeGenerator.to.toMillis())
         }
-        waitUnitFinished(testSimulation.id)
     }
 
     @Test
@@ -156,6 +162,5 @@ class RunSimulationUseCaseTests(
             val piecesAfter = execution.state!!.piecesFinished
             assertThat(piecesAfter).isGreaterThan(piecesBefore)
         }
-        waitUnitFinished(testSimulation.id)
     }
 }
