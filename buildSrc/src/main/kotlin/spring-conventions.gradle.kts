@@ -41,8 +41,7 @@ dependencies {
     runtimeOnly(libs.spring.modulith.actuator)
     runtimeOnly(libs.spring.modulith.observability)
     testImplementation(libs.kotlin.test.junit5)
-    testImplementation(libs.testcontainers.junit)
-    testImplementation(libs.testcontainers.postgresql)
+    testImplementation(libs.kotlin.awaitility)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 

@@ -5,7 +5,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
-import me.heyner.manusim.core.ManusimTest
+import me.heyner.manusim.test.annotation.ManusimIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.beans.factory.annotation.Autowired
@@ -27,7 +27,7 @@ class TestPersistableEntity : AbstractPersistableEntity<TestPersistableEntityId>
 
 interface TestPersistableEntityRepository : JpaRepository<TestPersistableEntity, TestPersistableEntityId>
 
-@ManusimTest
+@ManusimIntegrationTest
 class AbstractPersistableEntityTests(
     @Autowired val testPersistableEntityRepository: TestPersistableEntityRepository,
 ) {

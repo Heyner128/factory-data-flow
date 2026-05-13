@@ -1,6 +1,5 @@
 package me.heyner.manusim.core.application
 
-import me.heyner.manusim.core.ManusimTest
 import me.heyner.manusim.core.domain.Machine
 import me.heyner.manusim.core.domain.MachineRepository
 import me.heyner.manusim.core.domain.Simulation
@@ -9,16 +8,17 @@ import me.heyner.manusim.core.domain.SimulationRepository
 import me.heyner.manusim.core.domain.Status
 import me.heyner.manusim.core.domain.TimeGenerator
 import me.heyner.manusim.core.exception.SimulationExecutionException
+import me.heyner.manusim.test.annotation.ManusimIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
+import org.awaitility.Awaitility
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
-import org.testcontainers.shaded.org.awaitility.Awaitility
 import java.time.Duration
 import kotlin.test.Test
 import kotlin.test.fail
 
-@ManusimTest
+@ManusimIntegrationTest
 class RunSimulationUseCaseTests(
     @Autowired private val runSimulationUseCase: RunSimulationUseCase,
     @Autowired private val simulationRepository: SimulationRepository,

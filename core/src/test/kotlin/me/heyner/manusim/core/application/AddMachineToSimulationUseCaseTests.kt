@@ -1,6 +1,5 @@
 package me.heyner.manusim.core.application
 
-import me.heyner.manusim.core.ManusimTest
 import me.heyner.manusim.core.domain.Machine
 import me.heyner.manusim.core.domain.MachineId
 import me.heyner.manusim.core.domain.MachineRepository
@@ -10,6 +9,7 @@ import me.heyner.manusim.core.domain.SimulationRepository
 import me.heyner.manusim.core.domain.TimeGenerator
 import me.heyner.manusim.core.exception.MachineNotFoundException
 import me.heyner.manusim.core.exception.SimulationNotFoundException
+import me.heyner.manusim.test.annotation.ManusimIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.assertThrows
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.time.Duration
 import kotlin.test.Test
 
-@ManusimTest
+@ManusimIntegrationTest
 class AddMachineToSimulationUseCaseTests(
     @Autowired val addMachineToSimulationUseCase: AddMachineToSimulationUseCase,
     @Autowired val simulationRepository: SimulationRepository,

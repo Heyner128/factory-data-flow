@@ -1,13 +1,13 @@
 package me.heyner.manusim.core.application
 
-import me.heyner.manusim.core.ManusimTest
 import me.heyner.manusim.core.domain.SimulationRepository
 import me.heyner.manusim.core.domain.Status
+import me.heyner.manusim.test.annotation.ManusimIntegrationTest
 import org.assertj.core.api.Assertions.assertThat
 import org.springframework.beans.factory.annotation.Autowired
 import kotlin.test.Test
 
-@ManusimTest
+@ManusimIntegrationTest
 class AddNewSimulationUseCaseTests(
     @Autowired private val addNewSimulationUseCase: AddNewSimulationUseCase,
     @Autowired private val simulationRepository: SimulationRepository,

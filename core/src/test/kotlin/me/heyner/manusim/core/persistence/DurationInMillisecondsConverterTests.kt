@@ -6,7 +6,7 @@ import jakarta.persistence.Convert
 import jakarta.persistence.EmbeddedId
 import jakarta.persistence.Entity
 import jakarta.persistence.Table
-import me.heyner.manusim.core.ManusimTest
+import me.heyner.manusim.test.annotation.ManusimIntegrationTest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.jpa.repository.JpaRepository
 import java.time.Duration
@@ -31,7 +31,7 @@ class TestWithDurationEntity : AbstractPersistableEntity<TestWithDurationEntityI
 
 interface TestWithDurationEntityRepository : JpaRepository<TestWithDurationEntity, TestWithDurationEntityId>
 
-@ManusimTest
+@ManusimIntegrationTest
 class DurationInMillisecondsConverterTests(
     @Autowired val testWithDurationEntityRepository: TestWithDurationEntityRepository,
 ) {

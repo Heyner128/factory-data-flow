@@ -1,8 +1,9 @@
 package me.heyner.manusim.core
 
+import me.heyner.manusim.test.annotation.ManusimIntegrationTest
 import kotlin.test.Test
 
-@ManusimTest
+@ManusimIntegrationTest
 class ManusimApplicationTests {
     @Test
     fun contextLoads() {
